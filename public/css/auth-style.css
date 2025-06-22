@@ -1,0 +1,33 @@
+:root {
+  --e-global-color-primary: #000000;
+  --e-global-color-secondary: #54595f;
+  --e-global-color-text: #7a7a7a;
+  --e-global-color-accent: #61ce70;
+  --e-global-color-197a4d8: #47001f;
+  --e-global-color-10c2075: #d0aa55;
+}
+.auth-forms {
+  min-height: 100vh;
+}
+
+.auth-forms .btn {
+  background-color: var(--e-global-color-10c2075);
+  color: #fff;
+  font-weight: 600;
+}
+.auth-forms .card {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.link {
+  text-decoration: none !important;
+  color: #5a0025 !important;
+}
+.auth-forms .language a {
+  text-decoration: none;
+  color: var(--e-global-color-197a4d8);
+}
+.auth-links {
+  text-decoration: none;
+  color: var(--e-global-color-197a4d8);
+}

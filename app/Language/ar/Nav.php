@@ -1,0 +1,25 @@
+<?php
+
+return [
+ 'home' => 'الرئيسية',
+ 'viar' => 'عن فيار',
+ 'shumus' => 'عن شموس',
+ 'contact_us' => 'اتصل بنا ',
+ 'contact_us_wa' => 'تواصل معنا',
+ 'dashboard' => 'لوحة التحكم',
+ 'about'     => 'من نحن',
+ 'goal'      => 'هدفنا',
+ 'vision'    => 'رؤيتنا',
+ 'values'    => 'قيمنا',
+ 'contact'   => 'اتصل بنا',
+ 'viar'      => 'فيار',
+ 'hero'      => 'الشعار',
+ 'services'  => 'الخدمات',
+ 'shumu'  => 'شموس',
+ 'agency'  => 'وكالة',
+ 'application'  => 'طلبات العمل',
+ 'login'  => 'تسجيل الدخول',
+ 'employer-requests'  => 'طلبات صاحب العمل',
+ 'main_activity' => 'النشاط الرئيسي',
+ 'join_us' => 'انضم إلينا',
+];

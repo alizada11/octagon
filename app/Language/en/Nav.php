@@ -1,0 +1,25 @@
+<?php
+
+return [
+ 'home' => 'Home',
+ 'viar' => 'About Viar ',
+ 'agency' => 'Agency Shumus ',
+ 'contact_us' => 'Contact Us',
+ 'contact_us_wa' => 'Contact Us',
+ 'dashboard' => 'Dashboard',
+ 'about'     => 'About',
+ 'goal'      => 'Goal',
+ 'vision'    => 'Vision',
+ 'values'    => 'Values',
+ 'contact'   => 'Contact',
+ 'viar'      => 'Viar',
+ 'hero'      => 'Hero',
+ 'services'  => 'Services',
+ 'shumus' => 'Shumus',
+ 'agency' => 'Agency',
+ 'application' => 'Job Applications',
+ 'login' => 'Login',
+ 'employer-requests'  => 'Employer Requests',
+ 'main_activity' => 'Main Activity',
+ 'join_us' => 'Join Us',
+];

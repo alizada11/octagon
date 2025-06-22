@@ -1,0 +1,86 @@
+.language-switcher i {
+  color: white;
+}
+.language-switcher a {
+  text-decoration: none;
+  color: white;
+}
+#menuSubmenu a {
+  color: #c5bdbd;
+}
+#menuSubmenu a:hover {
+  scale: 1.01;
+  color: white;
+}
+.sidebar .nav .nav-link:hover {
+  scale: 1.01;
+}
+.sidebar .nav-link.active {
+  background-color: #6e717469;
+  color: #fff !important;
+  font-weight: bold;
+}
+.about-table .actions {
+  display: flex;
+  gap: 2px;
+  justify-content: space-between;
+}
+.stepwizard-step p {
+  margin-top: 0px;
+  color: #666;
+}
+
+.stepwizard-row {
+  display: table-row;
+}
+
+.stepwizard {
+  display: table;
+  width: 100%;
+  position: relative;
+}
+
+.stepwizard .btn.disabled,
+.stepwizard .btn[disabled],
+.stepwizard fieldset[disabled] .btn {
+  opacity: 1 !important;
+  color: #bbb;
+}
+
+.stepwizard-row:before {
+  top: 14px;
+  bottom: 0;
+  position: absolute;
+  content: ' ';
+  width: 100%;
+  height: 1px;
+  background-color: #ccc;
+  z-index: 0;
+}
+
+.stepwizard-step {
+  display: table-cell;
+  text-align: center;
+  position: relative;
+}
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px;
+}
+.w3-container.toggle-header {
+  padding: 10px;
+  background-color: #eee;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+.toggle-header h5 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+}

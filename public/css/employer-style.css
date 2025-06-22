@@ -1,0 +1,15 @@
+.language-switcher i {
+  color: white;
+}
+.language-switcher a {
+  text-decoration: none;
+  color: white;
+}
+.sidebar .nav .nav-link:hover {
+  scale: 1.01;
+}
+.sidebar .nav-link.active {
+  background-color: #6e717469;
+  color: #fff !important;
+  font-weight: bold;
+}
