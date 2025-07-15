@@ -31,3 +31,7 @@
   text-decoration: none;
   color: var(--e-global-color-197a4d8);
 }
+.select2-search__field {
+  margin: 7px 10px !important;
+  height: 23px !important;
+}

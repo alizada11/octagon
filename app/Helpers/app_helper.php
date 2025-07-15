@@ -125,6 +125,20 @@ if (!function_exists("role_type")) {
     }
   }
 }
+
+if (!function_exists("interested_title")) {
+  function interested_title($id)
+  {
+    $ShumusServiceModel = new \App\Models\ShumusServiceModel();
+    $result = $ShumusServiceModel->find($id);
+
+    // Return the title directly
+    return $result['title'] ?? '';
+  }
+}
+
+
+
 if (!function_exists("account_type_by_id")) {
   function account_type_by_id($id)
   {

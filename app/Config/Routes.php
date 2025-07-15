@@ -99,6 +99,8 @@ $routes->group('admin', ['filter' => 'role:admin', 'namespace' => 'App\Controlle
  $routes->get('agencies/edit/(:num)', 'AgencyController::edit/$1');
  $routes->post('agencies/update/(:num)', 'AgencyController::update/$1');
  $routes->get('agencies/delete/(:num)', 'AgencyController::delete/$1');
+
+
  // footer
  $routes->get('settings/footer', 'SettingsController::footer');
  $routes->post('settings/footer', 'SettingsController::footer');
@@ -147,7 +149,25 @@ $routes->group('jobseeker', ['filter' => 'role:jobseeker,employer,admin'], funct
  $routes->get('profile/(:num)', 'JobseekerApplicationController::applicant_profile/$1');
 });
 $routes->get('get-agencies/(:num)', 'ApplicationController::getAgencies/$1');
+$routes->group('agency', function ($routes) {
+ $routes->get('dashboard', 'Agency::index');
 
+ $routes->match(['get', 'post'], 'edit', 'Agency::edit', ['filter' => 'auth']);
+
+ $routes->get('complete-profile', 'AgencyCompletion::index');
+ $routes->get('step1', 'AgencyCompletion::step1');
+ $routes->post('step1', 'AgencyCompletion::saveStep1');
+
+ $routes->get('step2', 'AgencyCompletion::step2');
+ $routes->post('step2', 'AgencyCompletion::saveStep2');
+
+ $routes->get('step3', 'AgencyCompletion::step3');
+ $routes->post('step3', 'AgencyCompletion::saveStep3');
+
+ $routes->post('updateStep1', 'Agency::updateStep1');
+ $routes->post('updateStep2', 'Agency::updateStep2');
+ $routes->post('updateStep3', 'Agency::updateStep3');
+});
 $routes->group('employer', ['filter' => 'role:employer', 'namespace' => 'App\Controllers\Employer'], function ($routes) {
  $routes->get('dashboard', 'EmployerController::dashboard');
  $routes->get('profile', 'EmployerProfileController::index');

@@ -9,6 +9,8 @@
  <link href="<?= base_url('css/bootstrap.min.css') ?>" rel="stylesheet">
  <!-- Font Awesome -->
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+ <!-- Select 2 -->
+ <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
  <link rel="stylesheet" href="<?= base_url('css/fonts.css') ?>">
  <link rel="stylesheet" href="<?= base_url('css/auth-style.css') ?>">
@@ -62,7 +64,18 @@ $fontFamily = ($locale === 'ar') ? 'FFShamil' : 'Rubik';
  </div>
  </div>
 
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- if not already included -->
+ <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
+ <script>
+  $(document).ready(function() {
+   $('.select2-tags').select2({
+    tags: true, // allows adding new items
+    width: '100%',
+    tokenSeparators: [',']
+   });
+  });
+ </script>
  <script>
   document.addEventListener('DOMContentLoaded', function() {
    const roleSelect = document.querySelector('select[name="role"]');

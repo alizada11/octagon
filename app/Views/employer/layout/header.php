@@ -30,8 +30,9 @@
 
 <body>
  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3 justify-content-between">
-  <a class="navbar-brand" href="/employer/dashboard"><i class="fas fa-utensils me-2"></i>Octagon Employer Panel</a>
+  <a class="navbar-brand" href="/employer/dashboard"> <img src="<?= base_url('images/logo.png'); ?>" height="40px" width="35px" alt="logo" /> Octagon Employer Panel</a>
   <div class=" d-flex align-items-center gap-3">
+   <a href="/"><i class="text-white fas fa-eye fa-md"></i></a>
    <!-- Language Switcher -->
    <div class="language-switcher">
     <i class="fas fa-globe"></i>

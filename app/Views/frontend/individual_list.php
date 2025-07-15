@@ -17,13 +17,25 @@
       <p><strong>Phone:</strong> <?= esc($js->phone) ?></p>
       <p><strong>Address:</strong> <?= esc($js->address) ?></p>
       <p>
-       <strong>Title:</strong>
-       <?php
-       $availability = json_decode($js->available_for_work, true); // true => decode as array
+       <strong>Interested areas:<br></strong>
 
-       foreach ($availability as $items) {
-        echo $items . ', ';
-       } ?>
+       <?php
+       $availability = json_decode($js->available_for_work, true);
+       if ($availability) {
+
+        if (is_array($availability)) {
+         foreach ($availability as $id) {
+          $title = interested_title($id);
+          echo '<span style="display:inline-block; margin:2px; padding:4px 10px; background-color:#eee; border-radius:12px; font-size:13px;">' . esc($title) . '</span>';
+         }
+        } else {
+         echo 'N/A';
+        }
+       }
+       ?>
+
+
+
       </p>
       <a href="<?= base_url('jobseeker/profile/' . $js->user_id) ?>" class="btn py-2 btn-outline-primary btn-sm mt-auto">View Profile</a>
      </div>

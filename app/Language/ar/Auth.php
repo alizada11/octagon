@@ -25,5 +25,8 @@ return [
  'employer_type' => 'نوع العمالة',
  'personal_employer' => 'فردي  ',
  'company_employer' => 'صاحب العمل في الشركة',
+ 'agency_employer' => 'صاحب عمل الوكالة',
+ 'interested_areas' => 'الرجاء تحديد المجالات التي تهمك:',
+ 'select_or_search' => 'حدد أو ابحث عن المهارات',
  'select_role' => 'حدد الدور'
 ];

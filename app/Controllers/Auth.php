@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\BusinessesModel;
 use App\Models\JobseekerProfileModel;
 use App\Models\UserModel;
+use App\Models\ShumusServiceModel;
 use CodeIgniter\Controller;
 use CodeIgniter\I18n\Time;
 
@@ -56,7 +57,6 @@ class Auth extends BaseController
     return redirect()->to($redirectUrl);
    }
 
-   // 🔁 Default dashboard redirection
    // redirec to addmi dashboard
    if ($user['role'] == 'admin') {
     return redirect()->to('/admin/dashboard');
@@ -74,7 +74,18 @@ class Auth extends BaseController
    } elseif ($user['role'] == 'employer' && account_type() == 'personal') {
 
     return redirect()->to('/employer/dashboard');
+   } elseif ($user['role'] == 'employer' && account_type() == 'agency') {
+    // if account type is personal redirect them to their dashboard
+    $agencyModel = new \App\Models\AgencyModel();
+    $agency = $agencyModel->where('user_id', $user['id'])->first();
+
+    if ($agency && $agency['status'] == 'incomplete') {
+     return redirect()->to('/agency/complete-profile');
+    } else {
+     return redirect()->to('/agency/dashboard');
+    }
    } else {
+
 
     return redirect()->to('/jobseeker/dashboard');
    }
@@ -94,8 +105,12 @@ class Auth extends BaseController
  public function register()
  {
   helper('form');
+  $locale = service('request')->getLocale();
 
-  return view('auth/register');
+  $ShumusServiceModel = new ShumusServiceModel();
+  $data['services'] = $ShumusServiceModel->where('language', $locale)->findAll();
+
+  return view('auth/register', $data);
  }
 
  public function registerPost()
@@ -156,6 +171,16 @@ class Auth extends BaseController
 
   $userId = $userModel->insert($userData); // This returns the insert ID
 
+  if ($availableForWork == null) {
+   $availableForWork = [];
+  }
+  if ($this->request->getPost('account_type') == 'agency') {
+   $agencyModel = new \App\Models\AgencyModel();
+   $agencyModel->insert([
+    'user_id' => $userId,  //  the newly registered user ID
+    'status' => 'incomplete'
+   ]);
+  }
   // Now save the jobseeker profile using the user_id
   $profileModel->save([
    'full_name' => $this->request->getPost('full_name'),

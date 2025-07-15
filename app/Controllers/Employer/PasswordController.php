@@ -8,6 +8,10 @@ class PasswordController extends BaseController
 {
  public function changePasswordForm()
  {
+  if (account_type() == 'agency') {
+
+   return view('agency/change_password'); // or 'employer/change_password'
+  }
   return view('employer/change_password'); // or 'employer/change_password'
  }
 

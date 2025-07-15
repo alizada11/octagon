@@ -3,7 +3,7 @@
 
 <div class="col-md-10 p-4">
  <div class="container mt-4">
-  <h2 class="mb-4">My Profilesssssss</h2>
+  <h2 class="mb-4">My Profile</h2>
 
   <ul class="nav nav-tabs" id="profileTab" role="tablist">
    <li class="nav-item" role="presentation">

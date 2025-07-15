@@ -61,23 +61,29 @@
     <select name="account_type" class="form-control">
       <option value="personal" <?= set_select('account_type', 'personal') ?>><?= lang('Auth.personal_employer') ?></option>
       <option value="company" <?= set_select('account_type', 'company') ?>><?= lang('Auth.company_employer') ?></option>
+      <option value="agency" <?= set_select('account_type', 'agency') ?>><?= lang('Auth.agency_employer') ?></option>
     </select>
     <?php if (isset($validation)): ?>
       <small class="text-danger"><?= $validation->getError('account_type') ?></small>
     <?php endif; ?>
   </div>
   <div class="mb-3" id="availableForWorkWrapper" style="display: none;">
-    <label class="form-label">Please select which are you are interested in?</label><br>
-    <?php
-    $fields = ['Cooking', 'Painting', 'House Keeping', 'Childcare', 'Elderly Care'];
-    foreach ($fields as $field):
-    ?>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" name="available_for_work[]" value="<?= esc($field) ?>" id="<?= esc($field) ?>">
-        <label class="form-check-label" for="<?= esc($field) ?>"><?= esc($field) ?></label>
-      </div>
-    <?php endforeach; ?>
+    <label class="form-label"><?= lang('Auth.interested_areas') ?></label>
+    <select name="available_for_work[]" class="form-select select2-tags" multiple="multiple" data-placeholder="<?= lang('Auth.select_or_search') ?>">
+      <?php
+      $selected = old('available_for_work') ?? []; // or from DB
+      foreach ($services as $field):
+        $value = $field['id']; // or $field->id if it's an object
+        $label = $field['title']; // or $field->name
+      ?>
+        <option value="<?= esc($value) ?>" <?= in_array($value, $selected) ? 'selected' : '' ?>>
+          <?= esc($label) ?>
+        </option>
+      <?php endforeach; ?>
+
+    </select>
   </div>
+
 
   <button class="btn  w-100"><?= lang('Auth.register') ?></button>
   <div class="d-flex justify-content-between align-items-center">

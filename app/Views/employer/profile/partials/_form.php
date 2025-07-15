@@ -9,47 +9,50 @@ $profile = $profile ?? null;
  </div>
 
  <div class="col-md-6">
-  <label for="dob" class="form-label">Date of Birth</label>
+  <?php if (account_type() == 'agency') { ?>
+   <label for="dob" class="form-label">Registeration Date</label>
+  <?php } else { ?><label for="dob" class="form-label">Date of Birth</label>
+  <?php } ?>
   <input type="date" name="dob" class="form-control" value="<?= old('dob', $profile['dob'] ?? '') ?>" required>
  </div>
+ <?php if (account_type() != 'agency') { ?>
+  <div class="col-md-6">
+   <label for="gender" class="form-label">Gender</label>
+   <select name="gender" class="form-control" required>
+    <option value="">--Select--</option>
+    <option value="male" <?= old('gender', $profile['gender'] ?? '') === 'male' ? 'selected' : '' ?>>Male</option>
+    <option value="female" <?= old('gender', $profile['gender'] ?? '') === 'female' ? 'selected' : '' ?>>Female</option>
+   </select>
+  </div>
 
- <div class="col-md-6">
-  <label for="gender" class="form-label">Gender</label>
-  <select name="gender" class="form-control" required>
-   <option value="">--Select--</option>
-   <option value="male" <?= old('gender', $profile['gender'] ?? '') === 'male' ? 'selected' : '' ?>>Male</option>
-   <option value="female" <?= old('gender', $profile['gender'] ?? '') === 'female' ? 'selected' : '' ?>>Female</option>
-  </select>
- </div>
+  <div class="col-md-6">
+   <label for="marital_status" class="form-label">Marital Status</label>
+   <select name="marital_status" class="form-control" required>
+    <option value="">--Select--</option>
+    <option value="single" <?= old('marital_status', $profile['marital_status'] ?? '') === 'single' ? 'selected' : '' ?>>Single</option>
+    <option value="married" <?= old('marital_status', $profile['marital_status'] ?? '') === 'married' ? 'selected' : '' ?>>Married</option>
+    <option value="divorced" <?= old('marital_status', $profile['marital_status'] ?? '') === 'divorced)' ? 'selected' : '' ?>>Divorced</option>
+   </select>
+  </div>
 
- <div class="col-md-6">
-  <label for="marital_status" class="form-label">Marital Status</label>
-  <select name="marital_status" class="form-control" required>
-   <option value="">--Select--</option>
-   <option value="single" <?= old('marital_status', $profile['marital_status'] ?? '') === 'single' ? 'selected' : '' ?>>Single</option>
-   <option value="married" <?= old('marital_status', $profile['marital_status'] ?? '') === 'married' ? 'selected' : '' ?>>Married</option>
-   <option value="divorced" <?= old('marital_status', $profile['marital_status'] ?? '') === 'divorced)' ? 'selected' : '' ?>>Divorced</option>
-  </select>
- </div>
+  <div class="col-md-6">
+   <label for="nationality" class="form-label">Nationality</label>
 
- <div class="col-md-6">
-  <label for="nationality" class="form-label">Nationality</label>
+   <?php $nationalities =  include dirname(__DIR__, 3) . '/partials/nationalities.php';
+   $selectedNationality = $profile['nationality'] ?? '';
+   ?>
 
-  <?php $nationalities =  include dirname(__DIR__, 3) . '/partials/nationalities.php';
-  $selectedNationality = $profile['nationality'] ?? '';
-  ?>
+   <select name="nationality" class="form-select">
+    <option value="">Select your nationality</option>
+    <?php foreach ($nationalities as $nat): ?>
+     <option value="<?= esc($nat) ?>" <?= $nat === $selectedNationality ? 'selected' : '' ?>>
+      <?= esc($nat) ?>
+     </option>
+    <?php endforeach; ?>
+   </select>
 
-  <select name="nationality" class="form-select">
-   <option value="">Select your nationality</option>
-   <?php foreach ($nationalities as $nat): ?>
-    <option value="<?= esc($nat) ?>" <?= $nat === $selectedNationality ? 'selected' : '' ?>>
-     <?= esc($nat) ?>
-    </option>
-   <?php endforeach; ?>
-  </select>
-
- </div>
-
+  </div>
+ <?php } ?>
  <div class="col-md-6">
   <label for="address" class="form-label">Address</label>
   <input type="text" name="address" class="form-control" value="<?= old('address', $profile['address'] ?? '') ?>">
@@ -87,7 +90,11 @@ $profile = $profile ?? null;
   </div>
  <?php endif; ?>
  <div class="col-md-6">
-  <label for="photo" class="form-label">Photo</label>
+  <?php if (account_type() != 'agency') { ?>
+   <label for="photo" class="form-label">Photo</label>
+  <?php } else { ?>
+   <label for="photo" class="form-label">Registeration Document</label>
+  <?php } ?>
   <input type="file" name="photo" class="form-control">
   <?php if (!empty($profile['photo'])): ?>
    <img src="<?= base_url('uploads/employers/' . $profile['photo']) ?>" class="img-thumbnail mt-2" width="100">
@@ -95,11 +102,15 @@ $profile = $profile ?? null;
  </div>
 
  <div class="col-md-6">
-  <label for="cv_file" class="form-label">CV File</label>
+  <?php if (account_type() != 'agency') { ?>
+   <label for="photo" class="form-label">CV File</label>
+  <?php } else { ?>
+   <label for="photo" class="form-label">Registeration Cerfiticate</label>
+  <?php } ?>
   <div class="d-flex">
    <input type="file" name="cv_file" class="form-control">
    <?php if (!empty($profile['cv_file'])): ?>
-    <a href="<?= base_url('uploads/cvs/' . $profile['cv_file']) ?>" class="btn btn-sm btn-info mt-2" target="_blank">View CV</a>
+    <a href="<?= base_url('uploads/cvs/' . $profile['cv_file']) ?>" class="btn btn-sm btn-info mt-2" target="_blank">View </a>
    <?php endif ?>
   </div>
  </div>

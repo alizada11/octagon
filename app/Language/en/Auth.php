@@ -25,5 +25,8 @@ return [
  'employer_type' => 'Select employment type',
  'personal_employer' => 'Individual employer',
  'company_employer' => 'Company Employer',
+ 'agency_employer' => 'Agency Employer',
+ 'interested_areas' => 'Please select which areas you are interested in:',
+ 'select_or_search' => 'Select or search skills',
  'select_role' => '-- Select Role --'
 ];
