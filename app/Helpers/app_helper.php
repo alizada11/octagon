@@ -101,6 +101,8 @@ if (!function_exists('is_location')) {
   }
 }
 
+
+
 if (!function_exists("account_type")) {
   function account_type()
   {
@@ -110,6 +112,51 @@ if (!function_exists("account_type")) {
     $user = $userModel->find($userId);
     if ($user) {
       return $user['account_type'];
+    }
+  }
+}
+if (!function_exists("country_name")) {
+  function country_name($id)
+  {
+
+    $locale = service('request')->getLocale();
+    $countriesModel = new \App\Models\CountriesModel();
+
+    $country = $countriesModel->find($id);
+
+    if ($country) {
+      if ($locale === 'en') {
+        $country_name =  $country['country_name_en'];
+        return $country_name;
+      } elseif ($locale === 'ar') {
+        $country_name = $country['country_name_ar'];
+        return $country_name;
+      }
+    }
+
+    return null;
+  }
+}
+
+if (!function_exists("user_full_name")) {
+  function user_full_name($id)
+  {
+    $userModel = new \App\Models\JobseekerProfileModel();
+
+    $user = $userModel->where('user_id', $id)->first();
+    if ($user) {
+      return $user['full_name'];
+    }
+  }
+}
+if (!function_exists("agency_name")) {
+  function agency_name($id)
+  {
+    $agencyModdel = new \App\Models\AgencyModel();
+
+    $agency = $agencyModdel->where('id', $id)->first();
+    if ($agency) {
+      return $agency['name'];
     }
   }
 }
@@ -129,13 +176,21 @@ if (!function_exists("role_type")) {
 if (!function_exists("interested_title")) {
   function interested_title($id)
   {
+
     $ShumusServiceModel = new \App\Models\ShumusServiceModel();
     $result = $ShumusServiceModel->find($id);
 
-    // Return the title directly
-    return $result['title'] ?? '';
+    if ($result) {
+      $locale = service('request')->getLocale();
+      $title = $locale == 'en' ? $result['title_en'] : $result['title_ar'];
+      // Return the title directly'
+      return $title;
+    } else {
+      return null;
+    }
   }
 }
+
 
 
 

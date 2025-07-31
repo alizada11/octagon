@@ -9,12 +9,27 @@
     <h2 class="mb-1"><?= lang('Global.my_profile') ?></h2>
     <p class="text-muted"><?= lang('Global.manage_your_profile_information') ?></p>
    </div>
+   <?php
+   // Set progress bar class based on score
+   $barClass = 'bg-danger';
+   if ($completion_score >= 80) {
+    $barClass = 'bg-success';
+   } elseif ($completion_score >= 50) {
+    $barClass = 'bg-warning';
+   }
+   ?>
+
    <div class="profile-completion">
     <div class="progress" style="height: 8px; width: 150px;">
-     <div class="progress-bar bg-success" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+     <div class="progress-bar <?= $barClass ?>" role="progressbar"
+      style="width: <?= $completion_score ?>%;"
+      aria-valuenow="<?= $completion_score ?>" aria-valuemin="0" aria-valuemax="100">
+     </div>
     </div>
-    <small class="text-muted">75% profile complete</small>
+    <small class="text-muted"><?= $completion_score ?><?= lang('Global.profile_compelete') ?></small>
    </div>
+
+
   </div>
 
   <!-- Main Profile Card -->

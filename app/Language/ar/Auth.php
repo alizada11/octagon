@@ -4,6 +4,12 @@
 return [
  'title' => 'تسجيل الدخول للمشرف',
  'full_name' => 'الاسم',
+ 'agency' => 'وكالة',
+ 'select_agency' => 'وكالة انتخابية',
+ 'country' => 'اختر البلد',
+ 'select_country' => '--اختر البلد--',
+ 'no_agencies_found' => 'لم يتم العثور على وكالات',
+ 'error_fetching_agencies' => 'خطأ في جلب الوكالات',
  'register_title' => 'تسجيل مشرف جديد',
  'forgot_title' => 'نسيت كلمة المرور',
  'reset_title' => 'إعادة تعيين كلمة المرور',
@@ -28,5 +34,6 @@ return [
  'agency_employer' => 'صاحب عمل الوكالة',
  'interested_areas' => 'الرجاء تحديد المجالات التي تهمك:',
  'select_or_search' => 'حدد أو ابحث عن المهارات',
- 'select_role' => 'حدد الدور'
+ 'select_role' => 'حدد الدور',
+ 'back_to_website' => 'العودة إلى الموقع'
 ];

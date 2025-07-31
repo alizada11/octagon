@@ -4,6 +4,7 @@
 return [
  'my_profile' => '  المطلوبة',
  'education' => 'تعليم',
+ 'dashboard' => 'لوحة القيادة',
  'passport_info' => 'معلومات جواز السفر',
  'passport_number' => 'رقم جواز السفر',
  'place_of_issue' => 'مكان الإصدار',
@@ -110,4 +111,11 @@ return [
  'new_password'         => 'كلمة المرور الجديدة',
  'confirm_new_password' => 'تأكيد كلمة المرور الجديدة',
  'update_password'      => 'تحديث كلمة المرور',
+ 'manage_your_profile_information' => 'إدارة معلومات ملفك الشخصي',
+ 'profile_compelete' => '% تم إكمال الملف الشخصي',
+ 'find_jobseeker_in' => 'ابحث عن الباحثين عن عمل الموهوبين في',
+ 'corporate_subtitle' => 'تصفح مجموعتنا من المرشحين المؤهلين المستعدين لفرص جديدة',
+ 'view_full_profile' => 'عرض الملف الشخصي الكامل',
+ 'interested_areas' => 'المجالات المهتمة',
+ 'personal_information' => 'معلومات شخصية'
 ];

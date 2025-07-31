@@ -303,7 +303,7 @@
   ?>
    <div class="row py-3 text-center">
     <h5>No Business information found</h5>
-    <a href="business/registration" class="text-decoration-none"></a>
+    <a href="<?= base_url('business/registration') ?>" class="text-decoration-none">Set Business Information</a>
    </div>
   <?php
  } else {

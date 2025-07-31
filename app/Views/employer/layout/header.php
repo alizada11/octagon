@@ -30,7 +30,7 @@
 
 <body>
  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3 justify-content-between">
-  <a class="navbar-brand" href="/employer/dashboard"> <img src="<?= base_url('images/logo.png'); ?>" height="40px" width="35px" alt="logo" /> Octagon Employer Panel</a>
+  <a class="navbar-brand" href="/"> <img src="<?= base_url('images/logo.png'); ?>" height="40px" width="35px" alt="logo" />Octagon</a>
   <div class=" d-flex align-items-center gap-3">
    <a href="/"><i class="text-white fas fa-eye fa-md"></i></a>
    <!-- Language Switcher -->

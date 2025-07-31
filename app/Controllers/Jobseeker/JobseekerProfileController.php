@@ -22,19 +22,78 @@ class JobseekerProfileController extends BaseController
  }
  public function index()
  {
-  $educationModdel = new JobseekerEducation();
-  $experienceModdel = new JobseekerExperience();
-  $languageModdel = new JobseekerLanguage();
-  $skillModdel = new JobseekerSkill();
-  $model = new JobseekerProfileModel();
+  $educationModel = new JobseekerEducation();
+  $experienceModel = new JobseekerExperience();
+  $languageModel = new JobseekerLanguage();
+  $skillModel = new JobseekerSkill();
+  $profileModel = new JobseekerProfileModel();
   $passportModel = new PassportModel();
-  $user_id = session()->get('user_id');
-  $data['profile'] = $model->where('user_id', $user_id)->first();
-  $data['educations'] = $educationModdel->where('jobseeker_id', $user_id)->findAll();
-  $data['experiences'] = $experienceModdel->where('jobseeker_id', $user_id)->findAll();
-  $data['languages'] = $languageModdel->where('jobseeker_id', $user_id)->findAll();
-  $data['skills'] = $skillModdel->where('jobseeker_id', $user_id)->findAll();
-  $data['passports'] = $passportModel->where('user_id', $user_id)->findAll();
+
+  // Fetch data
+  $profile = $profileModel->where('user_id', $this->user_id)->first();
+  $educations = $educationModel->where('jobseeker_id', $this->user_id)->findAll();
+  $experiences = $experienceModel->where('jobseeker_id', $this->user_id)->findAll();
+  $languages = $languageModel->where('jobseeker_id', $this->user_id)->findAll();
+  $skills = $skillModel->where('jobseeker_id', $this->user_id)->findAll();
+  $passports = $passportModel->where('user_id', $this->user_id)->findAll();
+
+  // Define profile fields to check
+  $profileFields = [
+   'full_name',
+   'dob',
+   'gender',
+   'marital_status',
+   'nationality',
+   'religion',
+   'phone',
+   'country_id',
+   'country_code',
+   'photo',
+   'cv_file',
+   'place_of_birth',
+   'living_town',
+   'no_of_children',
+   'weight',
+   'height',
+   'complexion',
+  ];
+
+  $filled = 0;
+  $emptyFields = [];
+
+  foreach ($profileFields as $field) {
+   if (isset($profile[$field]) && $profile[$field] !== '' && $profile[$field] !== null) {
+    $filled++;
+   } else {
+    $emptyFields[] = $field;
+   }
+  }
+
+  $profileCompletion = round(($filled / count($profileFields)) * 100);
+
+  // Now score sections
+  $score = 0;
+
+  if ($profileCompletion >= 80) $score += 30; // Basic profile is 30%
+  if (count($educations)) $score += 15;
+  if (count($experiences)) $score += 15;
+  if (count($skills)) $score += 15;
+  if (count($languages)) $score += 10;
+  if (count($passports)) $score += 15;
+
+  // Output
+  $data = [
+   'profile' => $profile,
+   'educations' => $educations,
+   'experiences' => $experiences,
+   'languages' => $languages,
+   'skills' => $skills,
+   'passports' => $passports,
+   'completion_score' => $score, // send to view
+   'page_name' => 'Jobseeker Profile',
+  ];
+
+
   return view('jobseeker/profile/index', $data);
  }
 
@@ -430,9 +489,9 @@ class JobseekerProfileController extends BaseController
   return view('/jobseeker/profile/passport/passport', $data);
  }
 
- public function deletePassport()
+ public function deletePassport($id)
  {
-  $id = $this->user_id;
+
   $model = new PassportModel();
   $model->delete($id);
 

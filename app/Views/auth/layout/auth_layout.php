@@ -26,10 +26,15 @@ $fontFamily = ($locale === 'ar') ? 'FFShamil' : 'Rubik';
 </style>
 
 <body class=" d-flex align-items-center">
+ <?php
+ if (!isset($page_name) || $page_name == '') {
+  $page_name = '';
+ }
+ ?>
 
  <div class="container-fluid auth-forms p-0" style="background-image: url('<?= base_url('images/slider1.jpg') ?>'); background-size: cover; background-position: center;">
   <div class="row justify-content-center align-items-center" style="min-height: 100vh; background-color: rgba(71, 0, 31, 0.77); margin: 0;">
-   <div class="col-12 col-sm-11 col-md-8 col-lg-5 col-xl-4 px-3">
+   <div class="col-12 col-sm-11 col-md-8 col-lg-5 <?= $page_name == 'Registeration' ? 'col-xl-6' : 'col-xl-4' ?> px-3">
     <div class="card shadow-lg w-100">
 
      <?php if (session()->getFlashdata('success')): ?>
@@ -47,7 +52,7 @@ $fontFamily = ($locale === 'ar') ? 'FFShamil' : 'Rubik';
      <div class="card-body p-md-4">
       <?= $this->renderSection('content') ?>
 
-      <div><a class="link" href="/">Back to Website</a></div>
+      <div><a class="link" href="/"><?= lang('Auth.back_to_website'); ?></a></div>
       <div class="language-switcher">
        <i class="fas fa-globe"></i>
        <?php if (session('lang') == 'en'): ?>

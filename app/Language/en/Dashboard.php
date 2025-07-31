@@ -28,4 +28,5 @@ return [
  'skills' => 'Skills',
  'get' => 'Get',
  'logout' => 'Logout',
+ 'assignments' => 'Manage Assignments'
 ];

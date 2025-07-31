@@ -29,7 +29,11 @@
       <td><?= esc($user->account_type ?? 'N/A') ?></td>
       <td><?= esc($user->created_at) ?></td>
       <td>
-       <a href="<?= site_url('admin/users/b_details/' . $user->user_id) ?>" class="btn btn-sm btn-primary">Business Profile</a>
+       <?php if (account_type_by_id($user->user_id) == 'company'): ?>
+        <a href="<?= site_url('admin/users/b_details/' . $user->user_id) ?>" class="btn btn-sm btn-primary">Business Profile</a>
+       <?php else: ?>
+        <a href="<?= site_url('admin/jobseeker/profile/'  . $user->user_id) ?>" class="btn btn-sm btn-primary">User Profile</a>
+       <?php endif; ?>
       </td>
      </tr>
     <?php endforeach; ?>

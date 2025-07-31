@@ -17,7 +17,7 @@
      <td><?= esc($item['date_of_expiry']) ?></td>
      <td>
       <a href="<?= site_url('jobseeker/profile/passport/edit') ?>" class="btn btn-sm btn-warning"><?= lang('Global.edit') ?></a>
-      <a href="<?= site_url('jobseeker/profile/passport/delete') ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')"><?= lang('Global.delete') ?></a>
+      <a href="<?= site_url('jobseeker/profile/passport/delete/' . $item['id']) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')"><?= lang('Global.delete') ?></a>
      </td>
     </tr>
    <?php endforeach; ?>

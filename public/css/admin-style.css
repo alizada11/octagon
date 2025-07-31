@@ -29,6 +29,14 @@
   margin-top: 0px;
   color: #666;
 }
+.stepwizard-step a[disabled] {
+  pointer-events: none; /* Prevent clicks */
+  opacity: 0.6; /* Optional: fade appearance */
+  background-color: #f5f5f5; /* Light background */
+  border-color: #ccc; /* Lighter border */
+  color: #999 !important; /* Greyed-out text */
+  cursor: not-allowed; /* Show not-allowed cursor */
+}
 
 .stepwizard-row {
   display: table-row;

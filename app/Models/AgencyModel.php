@@ -26,7 +26,8 @@ class AgencyModel extends Model
     'representative_phone',
     'representative_email',
     'license_file',
-    'status'
+    'status',
+    'agency_id'
   ];
 
   protected $useTimestamps = true;

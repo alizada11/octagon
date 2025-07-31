@@ -19,6 +19,8 @@ class JobseekerApplicationController extends BaseController
 {
  public function index($segment = null)
  {
+  echo 'here';
+  exit();
   $countryModel = new CountriesModel();
   $locale = service('request')->getLocale();
 
@@ -101,6 +103,7 @@ class JobseekerApplicationController extends BaseController
 
  public function applicant_profile($user_id)
  {
+
 
   $educationModdel = new JobseekerEducation();
   $experienceModdel = new JobseekerExperience();

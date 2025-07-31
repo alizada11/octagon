@@ -21,6 +21,8 @@ class AlreadyLoggedInFilter implements FilterInterface
     return redirect()->to('/jobseeker/dashboard');
    } elseif ($role === 'employer') {
     return redirect()->to('/employer/dashboard');
+   } elseif ($role === 'agency') {
+    return redirect()->to('/agency/dashboard');
    } else {
     return redirect()->to('/');
    }

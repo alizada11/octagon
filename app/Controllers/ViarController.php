@@ -20,7 +20,7 @@ class ViarController extends BaseController
         $ShumusServiceModel = new ShumusServiceModel();
         $viarServiceModel = new ViarServiceModel();
         $data['viar_services'] = $viarServiceModel->where('language', $locale)->findAll();
-        $data['shumus_services'] = $ShumusServiceModel->where('language', $locale)->findAll();
+        $data['shumus_services'] = $ShumusServiceModel->findAll();
 
         $locale = service('request')->getLocale();
         $data['hero'] = $viarModel->where('language', $locale)->where('type', 'hero')->first();

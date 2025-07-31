@@ -50,10 +50,15 @@
 
             <!-- Service Card -->
             <div class=" col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="0">
-               <div class=" s-card h-100 d-flex flex-column">
-                  <div class="mb-3 service-icon fs-3"><img src="<?= base_url($service['icon']) ?>" alt=""></div>
-                  <h3 class="heading  mb-3"><?= $service['title'] ?></h3>
-               </div>
+               <a class="link-white" href="<?= base_url('shumus/services/corporate-list/' . $service['id']); ?>">
+                  <div class=" s-card h-100 d-flex flex-column">
+                     <div class="mb-3 service-icon fs-3"><img src="<?= base_url($service['icon']) ?>" alt=""></div>
+                     <h3 class="heading mb-3">
+                        <?= $locale == 'en' ? $service['title_en'] : $service['title_ar'] ?>
+                     </h3>
+
+                  </div>
+               </a>
             </div>
          <?php endforeach; ?>
 

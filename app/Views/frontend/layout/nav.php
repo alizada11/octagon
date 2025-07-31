@@ -140,9 +140,7 @@
         <a style="text-decoration: none; color:white; display:flex; align-items:center;" href="/login">
           <i class="fas fa-sign-in me-2 text-white"></i> <?= lang('Nav.join_us') ?></a>
       <?php } else { ?>
-        <a href="/login"><i class="fas fa-tachometer-alt ms-3 fa-lg"></i> Dashboard</a>
-
-
+        <a href="/login" class="link-white"><i class="fas fa-tachometer-alt ms-3 fa-lg"></i> <?= lang('Global.dashboard') ?></a>
       <?php } ?>
 
     </div>

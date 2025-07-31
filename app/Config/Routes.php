@@ -5,19 +5,21 @@ use CodeIgniter\Router\RouteCollection;
 
 /**
  * @var RouteCollection $routes
- */
+ **/
 // public pages
 $routes->get('viar', 'ViarController::index');
 $routes->get('viar/serices', 'ViarController::services');
 $routes->get('shumus', 'ShumusController::index');
 $routes->get('shumus/services/individual', 'ShumusController::individual');
 $routes->get('shumus/services/corporate', 'ShumusController::corporate');
+$routes->get('shumus/services/corporate-list/(:num)', 'ShumusController::corporateList/$1');
 $routes->get('shumus/services', 'ShumusController::services');
 $routes->get('contact-us', 'ContactUsController::index');
 $routes->post('contact/submit', 'ContactUsController::submit');
 // Role mangement
 $routes->group('admin', ['filter' => 'role:admin', 'namespace' => 'App\Controllers\Employer'], function ($routes) {
  $routes->get('employer-requests', 'EmployerRequestController::adminIndex');
+ $routes->post('employer-request/assign-agency', 'EmployerRequestController::assignAgency');
  $routes->post('employer-requests/update-status/(:num)', 'EmployerRequestController::updateStatus/$1');
  $routes->get('employer-requests/delete/(:num)', 'EmployerRequestController::delete/$1');
 });
@@ -125,7 +127,7 @@ $routes->group('jobseeker/profile/education', ['namespace' => 'App\Controllers\J
 });
 
 // employer routes
-$routes->group('apply', ['filter' => 'role:employer,jobseeker'], function ($routes) {
+$routes->group('apply', ['filter' => 'role:employer'], function ($routes) {
  $routes->get('(:segment)', 'ApplicationController::index/$1');
  $routes->post('apply', 'ApplicationController::apply');
 });
@@ -133,7 +135,7 @@ $routes->group('apply', ['filter' => 'role:employer,jobseeker'], function ($rout
 $routes->group('admin', ['filter' => 'role:admin'], function ($routes) {
  $routes->get('applications', 'ApplicationController::applications');
  $routes->post('applications/delete/(:num)', 'ApplicationController::delete/$1');
-
+ $routes->get('jobseeker/assign/(:num)/(:num)', 'ApplicationController::assign/$1/$2');
  $routes->get('jobseeker/profile/(:num)', 'ApplicationController::applicant_profile/$1');
  $routes->get('applications/update-status/(:num)', 'ApplicationController::updateStatus/$1');
  $routes->post('applications/update-status/(:num)', 'ApplicationController::updateStatus/$1');
@@ -145,15 +147,16 @@ $routes->group('jobseeker', ['filter' => 'role:jobseeker'], function ($routes) {
  $routes->get('applications/update-status/(:num)', 'JobseekerApplicationController::updateStatus/$1');
  $routes->post('applications/update-status/(:num)', 'JobseekerApplicationController::updateStatus/$1');
 });
-$routes->group('jobseeker', ['filter' => 'role:jobseeker,employer,admin'], function ($routes) {
+$routes->group('jobseeker', ['filter' => 'role:jobseeker,employer,admin,agency'], function ($routes) {
  $routes->get('profile/(:num)', 'JobseekerApplicationController::applicant_profile/$1');
 });
 $routes->get('get-agencies/(:num)', 'ApplicationController::getAgencies/$1');
-$routes->group('agency', function ($routes) {
+$routes->group('agency', ['filter' => 'role:agency'], function ($routes) {
  $routes->get('dashboard', 'Agency::index');
+ $routes->get('assignments', 'Agency::assignments');
+ $routes->post('employer-requests/update-status/(:num)', 'Agency::update_status/$1');
 
  $routes->match(['get', 'post'], 'edit', 'Agency::edit', ['filter' => 'auth']);
-
  $routes->get('complete-profile', 'AgencyCompletion::index');
  $routes->get('step1', 'AgencyCompletion::step1');
  $routes->post('step1', 'AgencyCompletion::saveStep1');
@@ -176,8 +179,10 @@ $routes->group('employer', ['filter' => 'role:employer', 'namespace' => 'App\Con
  $routes->post('profile/store', 'EmployerProfileController::store');
  $routes->post('profile/update/(:num)', 'EmployerProfileController::update/$1');
  $routes->get('request-form', 'EmployerRequestController::submitForm');
+ $routes->get('hire/(:num)', 'EmployerRequestController::hireForm/$1');
  $routes->post('request', 'EmployerRequestController::submitRequest');
  $routes->get('requests', 'EmployerRequestController::myRequests');
+ $routes->post('hire', 'EmployerRequestController::hire');
  $routes->get('business/details', 'EmployerProfileController::businessInfo');
 
  $routes->get('change-password', 'PasswordController::changePasswordForm');
@@ -219,7 +224,7 @@ $routes->group('jobseeker/profile', ['filter' => 'role:jobseeker', 'namespace' =
  $routes->post('experience/store', 'JobseekerProfileController::experienceStore');
  $routes->get('experience/edit/(:num)', 'JobseekerProfileController::experienceEdit/$1');
  $routes->post('experience/update/(:num)', 'JobseekerProfileController::experienceUpdate/$1');
- $routes->post('experience/delete/(:num)', 'JobseekerProfileController::experienceDelete/$1');
+ $routes->get('experience/delete/(:num)', 'JobseekerProfileController::experienceDelete/$1');
 
  // Languages
  $routes->get('languages', 'JobseekerProfileController::languageIndex');
@@ -227,7 +232,7 @@ $routes->group('jobseeker/profile', ['filter' => 'role:jobseeker', 'namespace' =
  $routes->post('languages/store', 'JobseekerProfileController::languageStore');
  $routes->get('languages/edit/(:num)', 'JobseekerProfileController::languageEdit/$1');
  $routes->post('languages/update/(:num)', 'JobseekerProfileController::languageUpdate/$1');
- $routes->post('languages/delete/(:num)', 'JobseekerProfileController::languageDelete/$1');
+ $routes->get('languages/delete/(:num)', 'JobseekerProfileController::languageDelete/$1');
 
  // Skills
  $routes->get('skills', 'JobseekerProfileController::skillIndex');
@@ -235,13 +240,13 @@ $routes->group('jobseeker/profile', ['filter' => 'role:jobseeker', 'namespace' =
  $routes->post('skills/store', 'JobseekerProfileController::skillStore');
  $routes->get('skills/edit/(:num)', 'JobseekerProfileController::skillEdit/$1');
  $routes->post('skills/update/(:num)', 'JobseekerProfileController::skillUpdate/$1');
- $routes->post('skills/delete/(:num)', 'JobseekerProfileController::skillDelete/$1');
+ $routes->get('skills/delete/(:num)', 'JobseekerProfileController::skillDelete/$1');
 
  // passport// Passport section for Jobseeker
  $routes->get('passport', 'JobseekerProfileController::passport');
  $routes->get('passport/edit', 'JobseekerProfileController::editPassport');
  $routes->post('passport/update', 'JobseekerProfileController::updatePassport');
- $routes->get('passport/delete', 'JobseekerProfileController::deletePassport');
+ $routes->get('passport/delete/(:num)', 'JobseekerProfileController::deletePassport/$1');
 });
 
 // language switch
@@ -250,6 +255,8 @@ $routes->get('lang/(:segment)', 'Language::switch/$1');
 $routes->get('login', 'Auth::login', ['filter' => 'noauth']);
 $routes->post('login', 'Auth::loginPost', ['filter' => 'noauth']);
 $routes->get('logout', 'Auth::logout');
+$routes->get('get-agencies-by-country/(:num)', 'Auth::agencies_by_countryId/$1');
+
 // users
 $routes->group('admin', ['filter' => 'role:admin'], function ($routes) {
  $routes->get('users', 'Auth::users');

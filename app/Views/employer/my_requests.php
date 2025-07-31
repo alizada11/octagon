@@ -22,7 +22,7 @@
       foreach ($requests as $r): ?>
         <tr>
           <td><?= $r['id'] ?></td>
-          <td><?= esc($r['service_category']) ?></td>
+          <td><?= $r['service_id'] ? interested_title($r['service_id']) : ''; ?></td>
 
           <td><span class="badge bg-<?= $r['status'] == 'approved' ? 'success' : ($r['status'] == 'rejected' ? 'danger' : 'warning') ?>">
               <?= ucfirst($r['status']) ?>

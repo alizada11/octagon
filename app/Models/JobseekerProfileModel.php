@@ -18,6 +18,7 @@ class JobseekerProfileModel extends Model
   'religion',
   'address',
   'phone',
+  'country_id',
   'country_code',
   'photo',
   'cv_file',
@@ -30,7 +31,8 @@ class JobseekerProfileModel extends Model
   'available_for_work',
   'id_cart_back',
   'id_cart_number',
-  'id_cart_front'
+  'id_cart_front',
+  'agency_id'
  ];
 
 

@@ -195,7 +195,7 @@ class Shumus extends BaseController
         $model = new ShumusServiceModel();
         $data = [
             'title'    => $this->request->getPost('title'),
-            'language' => $this->request->getPost('language'),
+            'title_en'    => $this->request->getPost('title_en'),
         ];
 
         if ($icon = $this->request->getFile('icon')) {

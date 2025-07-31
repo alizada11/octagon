@@ -3,7 +3,7 @@
  <ul class="nav flex-column">
   <li class="nav-item">
    <a class="nav-link text-white <?= ($uri->getSegment(1) == 'jobseeker' && $uri->getSegment(2) == '') ? 'active' : '' ?>" href="<?= base_url('jobseeker') ?>">
-    <?= lang('Nav.dashboard') ?>
+    <?= lang('Nav.jobseeker_dashboard') ?>
    </a>
   </li>
 

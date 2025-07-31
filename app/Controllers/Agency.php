@@ -227,4 +227,28 @@ class Agency extends BaseController
 
   return redirect()->to('/agency/register')->with('success', 'Registration submitted. Awaiting approval.');
  }
+
+ public function assignments()
+ {
+  $agency = new \App\Models\AgencyModel();
+  $agency_id = $agency->where('user_id', session()->get('user_id'))->select('id')->first();
+
+  $requests = new \App\Models\EmployerRequestModel();
+  $data['assignments'] = $requests->where('agency_id', $agency_id)->findAll();
+
+  return view('agency/assignments', $data);
+ }
+
+ public function update_status($id)
+ {
+  $model = new \App\Models\EmployerRequestModel();
+
+  $status = $this->request->getPost('status');
+
+  $model->update($id, [
+   'agency_approval' => $status
+  ]);
+
+  return redirect()->back()->with('success', 'Request status updated.');
+ }
 }

@@ -4,7 +4,7 @@
 <div class="col-md-10 p-4">
  <div class="container mt-4">
   <h2>Agencies</h2>
-  <a href="<?= site_url('admin/agencies/create') ?>" class="btn btn-primary mb-3">Add New Agency</a>
+  <!-- <a href="<?= site_url('admin/agencies/create') ?>" class="btn btn-primary mb-3">Add New Agency</a> -->
 
   <table class="table table-bordered">
    <thead>

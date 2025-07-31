@@ -212,7 +212,7 @@ i {
   position: relative;
   color: var(--e-global-color-10c2075) !important;
 }
-.nav-link.active::after {
+.nav-link.active::before {
   content: '';
   height: 3px;
   background-color: var(--e-global-color-10c2075);
@@ -376,6 +376,11 @@ i {
   color: var(--e-global-color-10c2075);
   font-weight: 600;
 }
+.custom-heading {
+  font-size: 26spx;
+  color: var(--e-global-color-10c2075);
+  font-weight: 600;
+}
 .vision .lead {
   font-size: 19px;
   font-weight: 400;
@@ -528,8 +533,13 @@ section.values {
   width: calc(100% + 1.3px);
 }
 /* cta */
-#cta .btn-warning {
+#cta .btn-warning,
+.custom-btn {
   background-color: var(--e-global-color-10c2075) !important;
+  color: #fff !important;
+}
+.custom-bg {
+  background-color: var(--e-global-color-197a4d8) !important;
   color: #fff !important;
 }
 #cta .btn {
@@ -632,6 +642,9 @@ section.values {
 
 /* viar page styles
  */
+.page-item.active a {
+  color: white;
+}
 .shumus-hero,
 .viar-hero {
   position: relative;
@@ -702,10 +715,21 @@ section.values {
   padding-bottom: 0.5rem;
   color: white;
 }
-
+.stepwizard-step a[disabled] {
+  pointer-events: none; /* Prevent clicks */
+  opacity: 0.6; /* Optional: fade appearance */
+  background-color: #f5f5f5; /* Light background */
+  border-color: #ccc; /* Lighter border */
+  color: #999 !important; /* Greyed-out text */
+  cursor: not-allowed; /* Show not-allowed cursor */
+}
 /* On hover */
 .dropdown-item.custom-dropdown-item:hover {
   background-color: #5a0025;
+  color: white;
+}
+.link-white {
+  text-decoration: none;
   color: white;
 }
 .link {

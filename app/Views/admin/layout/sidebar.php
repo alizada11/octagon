@@ -78,11 +78,11 @@
    </a>
   </li>
 
-  <li class="nav-item">
+  <!-- <li class="nav-item">
    <a class="nav-link text-white <?= ($uri->getSegment(2) == 'applications') ? 'active' : '' ?>" href="<?= base_url('/admin/applications') ?>">
     <?= lang('Nav.application') ?>
    </a>
-  </li>
+  </li> -->
 
   <li class="nav-item">
    <a class="nav-link text-white <?= ($uri->getSegment(2) == 'users') ? 'active' : '' ?>" href="<?= base_url('/admin/users') ?>">

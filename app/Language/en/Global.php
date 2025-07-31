@@ -3,6 +3,7 @@
 return [
  'my_profile' => 'My Profile',
  'passport_info' => 'Passport Info',
+ 'dashboard' => 'Dashboard',
  'education' => 'Eduucation',
  'passport_number' => 'Passport Number',
  'place_of_issue' => 'Place of Issue',
@@ -109,4 +110,12 @@ return [
  'new_password'         => 'New Password',
  'confirm_new_password' => 'Confirm New Password',
  'update_password'      => 'Update Password',
+ 'manage_your_profile_information' => 'Manage your profile information',
+ 'profile_compelete' => '% profile complete',
+ 'find_jobseeker_in' => 'Find Talented Jobseekers in',
+ 'corporate_subtitle' => 'Browse through our pool of qualified candidates ready for new opportunities',
+ 'view_full_profile' => 'View Full Profile',
+ 'no_applicant_foundd' => 'No Applicants found in this service',
+ 'interested_areas' => 'Interested Areas',
+ 'personal_information' => 'Personal Information'
 ];

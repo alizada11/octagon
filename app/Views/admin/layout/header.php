@@ -39,7 +39,7 @@
 <body>
  <?= view('partials/flash_message') ?>
  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3 justify-content-between">
-  <a class="navbar-brand" href="/admin/dashboard"><img src="<?= base_url('images/logo.png'); ?>" height="40px" width="35px" alt="logo" />Octagon Addmin Panel</a>
+  <a class="navbar-brand" href="<?= base_url("/"); ?>"><img src="<?= base_url('images/logo.png'); ?>" height="40px" width="35px" alt="logo" />Octagon </a>
   <div class=" d-flex gap-2 align-items-center justify-content-center">
 
    <div class="language-switcher">

@@ -8,18 +8,25 @@ use App\Models\UserModel;
 use App\Models\ShumusServiceModel;
 use CodeIgniter\Controller;
 use CodeIgniter\I18n\Time;
+use App\Models\AgencyModel;
+use App\Models\CountriesModel;
 
 class Auth extends BaseController
 {
+ protected $agencyModel;
+ protected $countryModel;
+
  public function __construct()
  {
+
+  $this->agencyModel = new AgencyModel();
+  $this->countryModel = new CountriesModel();
+
   helper('app');
   helper('cookie');
  }
  public function login()
  {
-
-
   helper(['form']);
   return view('auth/login');
  }
@@ -57,7 +64,7 @@ class Auth extends BaseController
     return redirect()->to($redirectUrl);
    }
 
-   // redirec to addmi dashboard
+   // redirec to admin dashboard
    if ($user['role'] == 'admin') {
     return redirect()->to('/admin/dashboard');
    } elseif ($user['role'] == 'employer' && account_type() == 'company') {
@@ -70,12 +77,12 @@ class Auth extends BaseController
      // otherwise redirect to their dashboard
      return redirect()->to('/employer/dashboard');
     }
-    // if account type is personal redirect them to their dashboard
+    // if account type is empooyer redirect them to their dashboard
    } elseif ($user['role'] == 'employer' && account_type() == 'personal') {
 
     return redirect()->to('/employer/dashboard');
-   } elseif ($user['role'] == 'employer' && account_type() == 'agency') {
-    // if account type is personal redirect them to their dashboard
+   } elseif ($user['role'] == 'agency') {
+    // if account type is agency redirect them to their dashboard
     $agencyModel = new \App\Models\AgencyModel();
     $agency = $agencyModel->where('user_id', $user['id'])->first();
 
@@ -108,7 +115,11 @@ class Auth extends BaseController
   $locale = service('request')->getLocale();
 
   $ShumusServiceModel = new ShumusServiceModel();
-  $data['services'] = $ShumusServiceModel->where('language', $locale)->findAll();
+
+  $data['locale'] = $locale;
+  $data['page_name'] = 'Registeration';
+  $data['countries'] = $this->countryModel->findAll();
+  $data['services'] = $ShumusServiceModel->findAll();
 
   return view('auth/register', $data);
  }
@@ -147,11 +158,21 @@ class Auth extends BaseController
    'email'    => 'required|valid_email|is_unique[users.email]',
    'password' => 'required|min_length[6]',
    'confirm_password' => 'required|matches[password]',
-   'role'     => 'required|in_list[employer,jobseeker]', // don't allow admin registration
+   'role'     => 'required|in_list[employer,jobseeker,agency]', // don't allow admin registration
   ];
 
   if (!$this->validate($rules, $messages)) {
-   return view('auth/register', ['validation' => $this->validator]);
+   // echo 'here';
+   // exit();
+   $data['countries'] = $this->countryModel->findAll();
+   $data['validation'] = $this->validator;
+   $locale = service('request')->getLocale();
+   $data['locale'] = $locale;
+   $ShumusServiceModel = new ShumusServiceModel();
+   $data['page_name'] = 'Registeration';
+   $data['services'] = $ShumusServiceModel->findAll();
+
+   return view('auth/register', $data);
   }
   $userModel = new \App\Models\UserModel();
   $profileModel = new \App\Models\JobseekerProfileModel();
@@ -174,7 +195,7 @@ class Auth extends BaseController
   if ($availableForWork == null) {
    $availableForWork = [];
   }
-  if ($this->request->getPost('account_type') == 'agency') {
+  if ($this->request->getPost('role') == 'agency') {
    $agencyModel = new \App\Models\AgencyModel();
    $agencyModel->insert([
     'user_id' => $userId,  //  the newly registered user ID
@@ -185,6 +206,7 @@ class Auth extends BaseController
   $profileModel->save([
    'full_name' => $this->request->getPost('full_name'),
    'user_id'   => $userId,
+   'agency_id' => $this->request->getPost('agency_id'),
    'available_for_work' => $availableForWork,
   ]);
 
@@ -258,6 +280,19 @@ class Auth extends BaseController
   ]);
 
   return redirect()->to('login')->with('success', lang('Auth.password_reset_success') ?? 'Password reset successfully.');
+ }
+ public function agencies_by_countryId($id)
+ {
+  $agencies = $this->agencyModel->where('country_id', $id)->findAll();
+
+  $results = array_map(function ($agency) {
+   return [
+    'id' => $agency['id'],
+    'name' => $agency['name']
+   ];
+  }, $agencies);
+
+  return $this->response->setJSON($results);
  }
  public function users()
  {

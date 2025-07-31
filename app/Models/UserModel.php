@@ -50,11 +50,13 @@ class UserModel extends Model
         'jobseeker_profiles.phone',
         'jobseeker_profiles.address',
         'jobseeker_profiles.nationality',
+        'jobseeker_profiles.country_code',
         'jobseeker_profiles.available_for_work'
       ])
       ->join('jobseeker_profiles', 'jobseeker_profiles.user_id = users.id', 'left')
       ->limit($limit, $offset)
       ->where('jobseeker_profiles.available_for_work', 0)
+      ->where('users.role', 'jobseeker')
       ->get()
       ->getResult();
   }

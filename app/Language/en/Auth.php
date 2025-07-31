@@ -4,6 +4,13 @@
 return [
  'title' => ' Login',
  'full_name' => 'Full Name',
+ 'agency' => 'Agency',
+ 'select_agency' => 'Select Agency',
+ 'country' => 'Select Country',
+ 'select_country' => '-- Select a Country --',
+ 'select_agency' => 'Select Agency',
+ 'no_agencies_found' => 'No agencies found',
+ 'error_fetching_agencies' => 'Error fetching agencies',
  'register_title' => ' Registration',
  'forgot_title' => 'Forgot Password',
  'reset_title' => 'Reset Your Password',
@@ -26,7 +33,9 @@ return [
  'personal_employer' => 'Individual employer',
  'company_employer' => 'Company Employer',
  'agency_employer' => 'Agency Employer',
- 'interested_areas' => 'Please select which areas you are interested in:',
+ 'interested_areas' => 'Select your interested areas',
  'select_or_search' => 'Select or search skills',
- 'select_role' => '-- Select Role --'
+ 'select_role' => '-- Select Role --',
+ // new
+ 'back_to_website' => 'Back to Website'
 ];
