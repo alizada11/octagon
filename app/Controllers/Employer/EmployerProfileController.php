@@ -11,6 +11,7 @@ class EmployerProfileController extends BaseController
  protected $profileModel;
 
 
+
  public function __construct()
  {
   $this->profileModel = new JobseekerProfileModel();
@@ -144,7 +145,7 @@ class EmployerProfileController extends BaseController
  {
   $model = new BusinessesModel();
   $info = $model->where('pid', session()->get('user_id'))->first();
-  // dd($info);
+
   return view('employer/profile/b_details', ['data' => $info]);
  }
 }

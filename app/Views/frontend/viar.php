@@ -92,7 +92,7 @@
 
        <?php endforeach; ?>
       </ul>
-      <a href="<?= site_url('apply/viar') ?>" class="btn btn-sm mt-3">
+      <!-- <a href="<?= site_url('apply/viar') ?>" class="btn btn-sm mt-3">
        <?php
 
        $role = session()->get('role');
@@ -106,7 +106,7 @@
 
        endif;
        ?>
-      </a>
+      </a> -->
      </div>
     </div>
    <?php endforeach; ?>

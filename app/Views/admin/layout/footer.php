@@ -56,6 +56,29 @@
  });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Select2 JS -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+ document.addEventListener('DOMContentLoaded', function() {
+  // Initialize Select2 on all .agency-select fields
+  $('.agency-select').select2({
+   width: '100%',
+   dropdownParent: $(this).closest('.modal') // ensure it works inside modals
+  });
+
+  // If you have many modals with same class, re-init on modal show
+  const modals = document.querySelectorAll('.modal');
+  modals.forEach(modal => {
+   modal.addEventListener('shown.bs.modal', function() {
+    $(this).find('.agency-select').select2({
+     dropdownParent: $(this),
+     width: '100%'
+    });
+   });
+  });
+ });
+</script>
+
 </body>
 
 </html>

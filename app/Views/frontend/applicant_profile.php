@@ -8,13 +8,10 @@
     </div>
     <div class="card-body">
       <div class="container bg-white p-4 rounded">
-        <h4 class="text-center mb-4 text-secondary">
-          APPLICATION FOR EMPLOYMENT<br>
-          <small class="text-muted">استماره طلب عمل</small>
-        </h4>
+
 
         <?php if (!empty($profile)): ?>
-          <div class="row mb-4">
+          <div class="row ">
             <div class="col-md-4 d-flex flex-column align-items-center">
               <div class="profile-photo-container mb-3">
                 <?php if (!empty($profile['photo'])): ?>
@@ -25,13 +22,10 @@
                   </div>
                 <?php endif; ?>
               </div>
+              <a href="<?= base_url('view/cv/' . $profile['user_id']) ?>" class="btn custom-btn "> <i class="fas fa-file-pdf mr-2"></i><?= lang('Global.view_cv') ?></a>
 
-              <?php if (!empty($profile['cv_file'])): ?>
-                <a href="<?= base_url('uploads/cvs/' . $profile['cv_file']) ?>" target="_blank" class="btn btn-primary btn-sm mt-2">
-                  <i class="fas fa-file-pdf mr-2"></i><?= lang('Global.view_cv') ?></a>
-              <?php endif; ?>
               <?php if (role_type() == "employer"): ?>
-                <a href="<?= base_url('employer/hire/' . $profile['user_id']) ?>" class=" mt-3 btn custom-btn"><?= lang('App.hire') ?></a>
+                <a href="<?= base_url('employer/hire/' . $profile['user_id']) ?>" class=" mt-3 btn custom-btn"><?= lang('Global.hire') ?></a>
               <?php endif; ?>
             </div>
             <div class="col-md-8">
@@ -39,19 +33,20 @@
                 <table class="table table-bordered table-hover">
                   <tbody>
                     <tr>
-                      <th class="bg-light" style="width: 40%;">Full Name</th>
-                      <td><?= esc($profile['full_name'] ?? 'N/A') ?></td>
-                      <th class="bg-light" style="width: 40%;">الاسم</th>
+                      <th class="bg-light" style="width: 40%;"><?= lang('Global.full_name') ?></th>
+                      <td><?= esc($profile['full_name'] ?? lang('Global.N/A')) ?></td>
                     </tr>
                     <tr>
-                      <th class="bg-light">Date of Birth</th>
-                      <td><?= esc($profile['dob'] ?? 'N/A') ?></td>
-                      <th class="bg-light">تاريخ الميلاد</th>
+                      <th class="bg-light"><?= lang('Global.dob') ?></th>
+                      <td><?= esc($profile['dob'] ?? lang('Global.N/A')) ?></td>
                     </tr>
                     <tr>
-                      <th class="bg-light">Phone</th>
-                      <td><?= esc($profile['phone'] ?? 'N/A') ?></td>
-                      <th class="bg-light">هاتف</th>
+                      <th class="bg-light"><?= lang('Global.phone') ?></th>
+                      <td><?= esc($profile['country_code'] . $profile['phone'] ?? lang('Global.N/A')) ?></td>
+                    </tr>
+                    <tr>
+                      <th class="bg-light"><?= lang('app.email') ?></th>
+                      <td><?= esc($user['email'] ?? lang('Global.N/A')) ?></td>
                     </tr>
                   </tbody>
                 </table>
@@ -91,59 +86,48 @@
           <table class="table table-bordered table-striped">
             <tbody>
               <tr>
-                <th class="bg-light" style="width: 30%;">Gender</th>
-                <td style="width: 30%;"><?= esc($profile['gender'] ?? 'N/A') ?></td>
-                <th class="bg-light" style="width: 30%;">جنس</th>
+                <th class="bg-light" style="width: 30%;"><?= lang('Global.gender') ?></th>
+                <td style="width: 30%;"><?= esc($profile['gender'] ?? lang('Global.N/A')) ?></td>
               </tr>
               <tr>
-                <th class="bg-light">Marital Status</th>
-                <td><?= esc($profile['marital_status'] ?? 'N/A') ?></td>
-                <th class="bg-light">الحالة الاجتماعية</th>
+                <th class="bg-light"><?= lang('Global.marital_status') ?></th>
+                <td><?= esc($profile['marital_status'] ?? lang('Global.N/A')) ?></td>
               </tr>
               <tr>
-                <th class="bg-light">Nationality</th>
-                <td><?= esc($profile['nationality'] ?? 'N/A') ?></td>
-                <th class="bg-light">جنسية</th>
+                <th class="bg-light"><?= lang('Global.nationality') ?></th>
+                <td><?= esc($profile['nationality'] ?? lang('Global.N/A')) ?></td>
               </tr>
               <tr>
-                <th class="bg-light">Address</th>
-                <td><?= esc($profile['address'] ?? 'N/A') ?></td>
-                <th class="bg-light">عنوان</th>
+                <th class="bg-light"><?= lang('Global.address') ?></th>
+                <td><?= esc($profile['address'] ?? lang('Global.N/A')) ?></td>
               </tr>
               <tr>
-                <th class="bg-light">Religion</th>
-                <td><?= esc($profile['religion'] ?? 'N/A') ?></td>
-                <th class="bg-light"> دین</th>
+                <th class="bg-light"><?= lang('Global.religion') ?></th>
+                <td><?= esc($profile['religion'] ?? lang('Global.N/A')) ?></td>
               </tr>
               <tr>
-                <th class="bg-light">No of Children</th>
-                <td><?= esc($profile['no_of_children'] ?? 'N/A') ?></td>
-                <th class="bg-light">عدد الأطفال</th>
+                <th class="bg-light"><?= lang('Global.no_of_children') ?></th>
+                <td><?= esc($profile['no_of_children'] ?? lang('Global.N/A')) ?></td>
               </tr>
               <tr>
-                <th class="bg-light">Place of Birth</th>
-                <td><?= esc($profile['place_of_birth'] ?? 'N/A') ?></td>
-                <th class="bg-light"> مكان الميلاد</th>
+                <th class="bg-light"><?= lang('Global.place_of_birth') ?></th>
+                <td><?= esc($profile['place_of_birth'] ?? lang('Global.N/A')) ?></td>
               </tr>
               <tr>
-                <th class="bg-light">Living town</th>
-                <td><?= esc($profile['living_town'] ?? 'N/A') ?></td>
-                <th class="bg-light">مدينة حية</th>
+                <th class="bg-light"><?= lang('Global.living_town') ?></th>
+                <td><?= esc($profile['living_town'] ?? lang('Global.N/A')) ?></td>
               </tr>
               <tr>
-                <th class="bg-light">Weight</th>
-                <td><?= esc($profile['weight'] ?? 'N/A') ?></td>
-                <th class="bg-light">وزن</th>
+                <th class="bg-light"><?= lang('Global.weight') ?></th>
+                <td><?= esc($profile['weight'] ?? lang('Global.N/A')) ?></td>
               </tr>
               <tr>
-                <th class="bg-light">Height</th>
-                <td><?= esc($profile['height'] ?? 'N/A') ?></td>
-                <th class="bg-light">ارتفاع</th>
+                <th class="bg-light"><?= lang('Global.height') ?></th>
+                <td><?= esc($profile['height'] ?? lang('Global.N/A')) ?></td>
               </tr>
               <tr>
-                <th class="bg-light">Complexion</th>
-                <td><?= esc($profile['complexion'] ?? 'N/A') ?></td>
-                <th class="bg-light">بشرة</th>
+                <th class="bg-light"><?= lang('Global.complexion') ?></th>
+                <td><?= esc($profile['complexion'] ?? lang('Global.N/A')) ?></td>
               </tr>
             </tbody>
           </table>

@@ -16,6 +16,7 @@ $routes->get('shumus/services/corporate-list/(:num)', 'ShumusController::corpora
 $routes->get('shumus/services', 'ShumusController::services');
 $routes->get('contact-us', 'ContactUsController::index');
 $routes->post('contact/submit', 'ContactUsController::submit');
+$routes->get('view/cv/(:num)', 'ApplicationController::view_cv/$1');
 // Role mangement
 $routes->group('admin', ['filter' => 'role:admin', 'namespace' => 'App\Controllers\Employer'], function ($routes) {
  $routes->get('employer-requests', 'EmployerRequestController::adminIndex');
@@ -190,11 +191,11 @@ $routes->group('employer', ['filter' => 'role:employer', 'namespace' => 'App\Con
 });
 
 $routes->group('jobseeker', ['filter' => 'role:jobseeker'], function ($routes) {
- $routes->get('/', 'jobseeker\JobseekerController::dashboard');
- $routes->get('dashboard', 'jobseeker\JobseekerController::dashboard');
+ $routes->get('/', 'Jobseeker\JobseekerController::dashboard');
+ $routes->get('dashboard', 'Jobseeker\JobseekerController::dashboard');
 
- $routes->get('change-password', 'jobseeker\PasswordController::changePasswordForm');
- $routes->post('change-password', 'jobseeker\PasswordController::updatePassword');
+ $routes->get('change-password', 'Jobseeker\PasswordController::changePasswordForm');
+ $routes->post('change-password', 'Jobseeker\PasswordController::updatePassword');
 });
 
 // businesses

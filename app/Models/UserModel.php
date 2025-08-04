@@ -54,10 +54,19 @@ class UserModel extends Model
         'jobseeker_profiles.available_for_work'
       ])
       ->join('jobseeker_profiles', 'jobseeker_profiles.user_id = users.id', 'left')
-      ->limit($limit, $offset)
-      ->where('jobseeker_profiles.available_for_work', 0)
+      ->where('JSON_LENGTH(jobseeker_profiles.available_for_work) > 0', null, false)
       ->where('users.role', 'jobseeker')
+      ->limit($limit, $offset)
       ->get()
       ->getResult();
+  }
+
+  public function countApplicantUsers()
+  {
+    return $this->db->table('users')
+      ->join('jobseeker_profiles', 'jobseeker_profiles.user_id = users.id', 'left')
+      ->where('jobseeker_profiles.available_for_work', 0)
+      ->where('users.role', 'jobseeker')
+      ->countAllResults(); // ✅ counts only matching rows
   }
 }

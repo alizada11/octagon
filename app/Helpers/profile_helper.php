@@ -2,7 +2,25 @@
 // App/Helpers/ProfileHelper.php
 function calculateProfileCompletion($user)
 {
- $fields = ['full_name', 'dob', 'gender', 'marital_status', 'nationality', 'address', 'phone', 'photo', 'cv_file'];
+ $fields = [
+  'full_name',
+  'dob',
+  'gender',
+  'marital_status',
+  'nationality',
+  'religion',
+  'address',
+  'phone',
+  'country_code',
+  'photo',
+  'place_of_birth',
+  'living_town',
+  'no_of_children',
+  'weight',
+  'height',
+  'complexion',
+  'available_for_work',
+ ];
  $filled = 0;
 
  foreach ($fields as $field) {

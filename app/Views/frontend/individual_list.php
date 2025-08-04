@@ -55,10 +55,10 @@
                         echo "<em>" . interested_title($id) . "</em>, ";
                       }
                     } else {
-                      echo '<span class="text-muted">Not specified</span>';
+                      echo '<span class="text-muted">' . lang("Global.not_specified") . '</span>';
                     }
                   } else {
-                    echo '<span class="text-muted">Not specified</span>';
+                    echo '<span class="text-muted">' . lang("Global.not_specified") . '</span>';
                   }
                   ?>
                 </div>

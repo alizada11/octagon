@@ -101,7 +101,8 @@
           <div class="modal-body">
            <div class="mb-3">
             <label>Select Agency</label>
-            <select name="agency_id" class="form-select" required>
+            <select name="agency_id" class="form-select agency-select" required>
+
              <option value="">-- Select Agency --</option>
              <?php foreach ($agencies as $a): ?>
               <option value="<?= $a['id'] ?>"><?= esc($a['name']) ?> (<?= esc(country_name($a['country_id'])) ?>)</option>

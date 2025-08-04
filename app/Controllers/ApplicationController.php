@@ -17,14 +17,8 @@ use App\Models\PassportModel;
 use App\Models\ShumusServiceModel;
 use App\Models\UserModel;
 use App\Models\ViarServiceModel;
-use Dompdf\Dompdf;
-use Dompdf\Options;
 use Mpdf\Mpdf;
-use Mpdf\Config\ConfigVariables;
-use Mpdf\Config\FontVariables;
 
-use Dompdf\Adapter\CPDF;
-use Dompdf\FontMetrics;
 
 class ApplicationController extends BaseController
 {
@@ -101,15 +95,15 @@ class ApplicationController extends BaseController
     $ShumusServiceModel = new ShumusServiceModel();
     $viarServiceModel = new ViarServiceModel();
     $data['viar_services'] = $viarServiceModel->where('language', $locale)->findAll();
-    $data['shumus_services'] = $ShumusServiceModel->where('language', $locale)->findAll();
+    $data['shumus_services'] = $ShumusServiceModel->findAll();
 
     $countryModel = new CountriesModel();
     $user_id = session()->get('user_id');
     $JobseekerProfileModel = new JobseekerProfileModel();
     $user = $JobseekerProfileModel->where('user_id', $user_id)->first();
     $completion = calculateProfileCompletion($user);
-    if ($completion < 70) {
-      return redirect()->back()->with('error', 'You must complete at least 70% of your profile to apply for jobs.<br>Please compelete your profile from your dashboard.');
+    if ($completion < 50) {
+      return redirect()->back()->with('error', 'You must complete at least 70% of your profile to apply for jobs.<br>Please compelete your profile from your dashboard.' . $completion . '% completed');
     }
     // Use the $segment for logic if needed
     $data['seg_name'] = ucfirst($segment); // example: turns "viar" into "Viar"
@@ -254,6 +248,73 @@ class ApplicationController extends BaseController
     return redirect()->to('/')
       ->with('message', 'Application submitted successfully!<br>Check your dashboard for next steps.');
   }
+  // view cv
+
+  public function view_cv($id)
+  {
+    helper(['form']);
+
+    // Load models
+    $jobAppModel = new \App\Models\JobApplicationModel();
+    $educationModel = new \App\Models\JobseekerEducation();
+    $experienceModel = new \App\Models\JobseekerExperience();
+    $languageModel = new \App\Models\JobseekerLanguage();
+    $skillModel = new \App\Models\JobseekerSkill();
+    $profileModel = new \App\Models\JobseekerProfileModel();
+    $passportModel = new \App\Models\PassportModel();
+    $userModel = new \App\Models\UserModel();
+
+    // Get user data
+    $user_id = $id;
+    $data['profile'] = $profileModel->where('user_id', $user_id)->first();
+    $data['user'] = $userModel->where('id', $user_id)->first();
+    $data['educations'] = $educationModel->where('jobseeker_id', $user_id)->findAll();
+    $data['experiences'] = $experienceModel->where('jobseeker_id', $user_id)->findAll();
+    $data['languages'] = $languageModel->where('jobseeker_id', $user_id)->findAll();
+    $data['skills'] = $skillModel->where('jobseeker_id', $user_id)->findAll();
+    $data['passports'] = $passportModel->where('user_id', $user_id)->first();
+
+    // Images (header/footer/photo)
+    $headerPath = FCPATH . 'images/cv_header.png';
+    $footerPath = FCPATH . 'images/cv_footer.png';
+    $photoPath = FCPATH . 'uploads/jobseekers/' . $data['profile']['photo'];
+
+    $data['cvHeaderSrc'] = 'data:' . mime_content_type($headerPath) . ';base64,' . base64_encode(file_get_contents($headerPath));
+    $data['cvFooterSrc'] = 'data:' . mime_content_type($footerPath) . ';base64,' . base64_encode(file_get_contents($footerPath));
+    $data['profilePhotoSrc'] = 'data:' . mime_content_type($photoPath) . ';base64,' . base64_encode(file_get_contents($photoPath));
+
+    // Generate HTML
+    $html = view('emails/cv_profile', $data);
+
+
+    // Create PDF with mPDF
+    $mpdf = new Mpdf([
+      'mode' => 'utf-8',
+      'default_font' => 'dejavusans',
+      'directionality' => 'rtl',
+      'autoScriptToLang' => true,
+      'autoLangToFont' => true,
+    ]);
+
+    $mpdf->WriteHTML($html);
+
+    // Save or overwrite PDF
+    $pdfPath = WRITEPATH . 'uploads/cv_' . $user_id . '.pdf';
+
+    // ✅ Delete existing file if exists
+    if (file_exists($pdfPath)) {
+      unlink($pdfPath);
+    }
+
+    $mpdf->Output($pdfPath, \Mpdf\Output\Destination::FILE);
+
+    // Return PDF inline in browser
+    return $this->response
+      ->setHeader('Content-Type', 'application/pdf')
+      ->setHeader('Content-Disposition', 'inline; filename="cv_' . $user_id . '.pdf"')
+      ->setBody(file_get_contents($pdfPath));
+  }
+
 
   // ADMIN: update status
   public function updateStatus($id)

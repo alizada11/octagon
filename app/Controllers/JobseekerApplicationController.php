@@ -14,6 +14,7 @@ use App\Models\JobseekerExperience;
 use App\Models\JobseekerLanguage;
 use App\Models\JobseekerSkill;
 use App\Models\PassportModel;
+use App\Models\UserModel;
 
 class JobseekerApplicationController extends BaseController
 {
@@ -111,13 +112,16 @@ class JobseekerApplicationController extends BaseController
   $skillModdel = new JobseekerSkill();
   $model = new JobseekerProfileModel();
   $passportModel = new PassportModel();
+  $userModel = new UserModel();
   $data['profile'] = $model->where('user_id', $user_id)->first();
   $data['educations'] = $educationModdel->where('jobseeker_id', $user_id)->findAll();
+  $data['user'] = $userModel->where('id', $user_id)->first();
   $data['experiences'] = $experienceModdel->where('jobseeker_id', $user_id)->findAll();
   $data['languages'] = $languageModdel->where('jobseeker_id', $user_id)->findAll();
   $data['skills'] = $skillModdel->where('jobseeker_id', $user_id)->findAll();
   $data['passports'] = $passportModel->where('user_id', $user_id)->findAll();
   $data['page_name'] = 'Jobseeker Profile';
+
   return view('frontend/applicant_profile', $data);
  }
 }

@@ -99,25 +99,23 @@ class ShumusController extends BaseController
         return view('frontend/corporate_applicants', $data);
     }
 
-
     public function individual()
     {
-
         $model = new \App\Models\UserModel();
 
         $perPage = 9;
         $page = (int) ($this->request->getGet('page') ?? 1);
         $offset = ($page - 1) * $perPage;
-        $total = $model->countAll();
+
+        $total = $model->countApplicantUsers(); // ✅ accurate count
 
         $pager = \Config\Services::pager();
         $pager->makeLinks($page, $perPage, $total, 'default_full');
 
         $data['pager'] = $pager;
-        // Load paginated users
         $data['jobseekers'] = (array) $model->applicantUsers($perPage, $offset);
-        // dd($data);
         $data['page_name'] = 'Individuals';
+
         return view('frontend/individual_list', $data);
     }
 }

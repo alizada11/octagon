@@ -111,11 +111,16 @@ return [
  'confirm_new_password' => 'Confirm New Password',
  'update_password'      => 'Update Password',
  'manage_your_profile_information' => 'Manage your profile information',
- 'profile_compelete' => '% profile complete',
+ 'profile_compelete' => '% profile completed',
  'find_jobseeker_in' => 'Find Talented Jobseekers in',
  'corporate_subtitle' => 'Browse through our pool of qualified candidates ready for new opportunities',
  'view_full_profile' => 'View Full Profile',
  'no_applicant_foundd' => 'No Applicants found in this service',
  'interested_areas' => 'Interested Areas',
- 'personal_information' => 'Personal Information'
+ 'personal_information' => 'Personal Information',
+ 'app_for_employment' => 'APPLICATION FOR EMPLOYMENT',
+ 'hire' => 'Hire',
+ 'no_applicant_found' => 'No applicant found for this title',
+ 'N/A' => 'N/A',
+ 'not_specified' => 'Not specified'
 ];

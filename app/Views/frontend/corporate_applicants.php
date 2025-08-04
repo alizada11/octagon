@@ -5,7 +5,7 @@
 <section class="py-5 bg-light">
   <div class="container">
     <div class="text-center mb-5">
-      <h4 class="custom-heading fw-bold mb-3"><?= lang('Global.find_jobseeker_in'); ?><ins><?= $locale == 'en' ? $service['title_en'] : $service['title_ar'] ?>
+      <h4 class="custom-heading fw-bold mb-3"><?= lang('Global.find_jobseeker_in'); ?> <ins><?= $locale == 'en' ? $service['title_en'] : $service['title_ar'] ?>
         </ins></h4>
       <p class="lead text-muted"><?= lang('Global.corporate_subtitle') ?></p>
     </div>

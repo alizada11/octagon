@@ -117,5 +117,10 @@ return [
  'corporate_subtitle' => 'تصفح مجموعتنا من المرشحين المؤهلين المستعدين لفرص جديدة',
  'view_full_profile' => 'عرض الملف الشخصي الكامل',
  'interested_areas' => 'المجالات المهتمة',
- 'personal_information' => 'معلومات شخصية'
+ 'personal_information' => 'معلومات شخصية',
+ 'app_for_employment' => 'استماره طلب عمل',
+ 'hire' => 'يؤجر',
+ 'no_applicant_found' => 'لم يتم العثور على متقدم لهذا اللقب',
+ 'N/A' => 'لا يوجد',
+ 'not_specified' => 'غير محدد'
 ];

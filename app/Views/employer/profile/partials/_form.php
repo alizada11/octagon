@@ -59,8 +59,22 @@ $profile = $profile ?? null;
  </div>
 
  <div class="col-md-6">
-  <label for="phone" class="form-label">Phone</label>
-  <input type="text" name="phone" class="form-control" value="<?= old('phone', $profile['phone'] ?? '') ?>">
+  <label for="phone" class="form-label"><?= lang('Global.phone') ?></label>
+  <?php
+  $countries = json_decode(file_get_contents(dirname(__DIR__, 3) . '/partials/countries-codes.json'), true);
+  $selected = old('country_code', $profile['country_code'] ?? '+91');
+  $phoneVal = old('phone', $profile['phone'] ?? '');
+  ?>
+  <div class="input-group">
+   <select id="country_code" name="country_code" class="form-select" style="max-width: 100px;">
+    <?php foreach ($countries as $ct): ?>
+     <option value="<?= esc($ct['dial_code']) ?>" <?= $ct['dial_code'] === $selected ? 'selected' : '' ?>>
+      <?= esc($ct['dial_code']) ?> <?= esc($ct['code']) ?>
+     </option>
+    <?php endforeach; ?>
+   </select>
+   <input type="text" name="phone" id="phone_number" class="form-control" value="<?= esc($phoneVal) ?>">
+  </div>
  </div>
  <?php if ($profile['nationality'] == 'Omani' && role_type() == 'employer'): ?>
   <div class="col-md-6">

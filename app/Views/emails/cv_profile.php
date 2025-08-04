@@ -105,19 +105,27 @@
             margin: 0 5px;
         }
 
-        .cv_header {}
+        .cv_header,
+        .footer {
+            width: 100%;
+        }
+
+        .cv_header img,
+        .footer img {
+            width: 100%;
+        }
 
         .header {
             display: flex;
             align-items: center;
         }
 
-        .header .prof_img {
+        .prof_img {
             width: 20%;
 
         }
 
-        .header .prof_img img {
+        .prof_img img {
             width: 100%;
         }
 
@@ -195,53 +203,89 @@
         <div class="cv_header">
             <img src="<?= $cvHeaderSrc ?>" width="100%">
         </div>
-        <div class="header">
-            <div class="prof_img">
-                <img src="<?= $profilePhotoSrc ?>" class="logo-right">
-            </div>
-            <div class="req_det" style="display: flex; justify-content:space-between; flex-direction:column;">
 
-                <h4>APPLICATION FOR EMPLOYMENT</h4>
-                <h4> استماره طلب عمل</h4>
+        <table class="header" style="width: 100%;">
+            <tr>
+                <td style="width: 30%; text-align: left; ">
+                    <div style="width: 20%;">
+                        <img src="<?= $profilePhotoSrc ?>" width="200px" class="logo-right">
+                    </div>
+                </td>
+                <td style="width: 80%; text-align: center; ">
+                    <div class="req_det text-end" style=" display: flex; justify-content:space-between; flex-direction:column; width: 80%;">
 
-                <div><span class="start"> Applied to</span> <span class="middle"><?= $applied_for; ?></span> <span class="end arabic"> المطلوبة</span></div>
-                <div><span class="start">Full Name </span><span class="middle"><?= $profile['full_name'] ?></span> <span class="end arabic">الاسم الکامل </span></div>
-                <!-- <div><span class="start">Contract Period</span> <span class="middle">Two Years</span> <span class="end">مدة العقد</span></div> -->
-            </div>
-        </div>
-        <div class="section">
-            <div class="det_header">
+                        <h4>APPLICATION FOR EMPLOYMENT</h4>
+                        <h4> استماره طلب عمل</h4>
 
-                <h4>PASSPORT DETAILS</h4>
-                <h4 class="arabic">تفاصيل جواز السفر</h4>
+
+
+                        <table class="details-table">
+                            <tr>
+                                <td style="background-color: #47001F; color:white;">Full Name</td>
+                                <td><?= $profile['full_name'] ?? 'N/A' ?></td>
+                                <td class="arabic" style="background-color: #47001F; color:white;">الاسم الکامل </td>
+                            </tr>
+                            <tr>
+                                <td style="background-color: #47001F; color:white;">Email</td>
+                                <td><?= $user['email'] ?? 'N/A' ?></td>
+                                <td class="arabic" style="background-color: #47001F; color:white;"> بريد إلكتروني </td>
+                            </tr>
+                            <tr>
+                                <td style="background-color: #47001F; color:white;">Phone</td>
+                                <td><?= $profile['country_code'] . $profile['phone'] ?? 'N/A' ?></td>
+                                <td class="arabic" style="background-color: #47001F; color:white;">هاتف</td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div class=" section">
+            <div style=" border-radius: 12px 12px 0 0 ; overflow: hidden;">
+                <table class="det_header" style="width: 100%; ">
+                    <tr>
+                        <td style="width: 50%; text-align: left; ">
+                            <h4>PASSPORT DETAILS</h4>
+                        </td>
+                        <td style="width: 50%; text-align: right; ">
+                            <h4 class="arabic">تفاصيل جواز السفر</h4>
+                        </td>
+                    </tr>
+                </table>
+                <table class="details-table">
+                    <tr>
+                        <td>Number</td>
+                        <td><?= $passports['number'] ?? 'N/A' ?></td>
+                        <td class="arabic">رقم</td>
+                    </tr>
+                    <tr>
+                        <td>Date of Issue</td>
+                        <td><?= $passports['date_of_issue'] ?? 'N/A' ?></td>
+                        <td class="arabic">تاريخ الإصدار</td>
+                    </tr>
+                    <tr>
+                        <td>Place of Issue</td>
+                        <td><?= $passports['place_of_issue'] ?? 'N/A' ?></td>
+                        <td class="arabic">مكان الإصدار</td>
+                    </tr>
+                    <tr>
+                        <td>Date of Expiry</td>
+                        <td><?= $passports['date_of_expiry'] ?? 'N/A' ?></td>
+                        <td class="arabic">تاريخ الانتهاء</td>
+                    </tr>
+                </table>
             </div>
-            <table class="details-table">
+            <table class="det_header" style="width: 100%;">
                 <tr>
-                    <td>Number</td>
-                    <td><?= $passports['number'] ?? 'N/A' ?></td>
-                    <td class="arabic">رقم</td>
-                </tr>
-                <tr>
-                    <td>Date of Issue</td>
-                    <td><?= $passports['date_of_issue'] ?? 'N/A' ?></td>
-                    <td class="arabic">تاريخ الإصدار</td>
-                </tr>
-                <tr>
-                    <td>Place of Issue</td>
-                    <td><?= $passports['place_of_issue'] ?? 'N/A' ?></td>
-                    <td class="arabic">مكان الإصدار</td>
-                </tr>
-                <tr>
-                    <td>Date of Expiry</td>
-                    <td><?= $passports['date_of_expiry'] ?? 'N/A' ?></td>
-                    <td class="arabic">تاريخ الانتهاء</td>
+                    <td style="width: 50%; text-align: left; ">
+                        <h4>DETAILS OF APPLICATION</h4>
+                    </td>
+                    <td style="width: 50%; text-align: right; ">
+                        <h4 class="arabic">تفاصيل الطلب</h4>
+                    </td>
                 </tr>
             </table>
-            <div class="det_header">
-
-                <h4>DETAILS OF APPLICATION</h4>
-                <h4 class="arabic">تفاصيل الطلب</h4>
-            </div>
             <table class="details-table">
                 <tr>
                     <td>Nationality</td>
@@ -250,7 +294,7 @@
                 </tr>
                 <tr>
                     <td>Religion</td>
-                    <td>Christian</td>
+                    <td><?= $profile['religion'] ?></td>
                     <td class="arabic">دين</td>
                 </tr>
                 <tr>
@@ -309,11 +353,16 @@
                 </tr>
 
             </table>
-            <div class="det_header">
-
-                <h4>EDUCATIONSS</h4>
-                <h4 class="arabic">العلم </h4>
-            </div>
+            <table class="det_header" style="width: 100%;">
+                <tr>
+                    <td style="width: 50%; text-align: left; ">
+                        <h4>EDUCATIONSS</h4>
+                    </td>
+                    <td style="width: 50%; text-align: right; ">
+                        <h4 class="arabic">العلم </h4>
+                    </td>
+                </tr>
+            </table>
             <table class="details-table language-table">
                 <tr style="background-color: #eee; font-weight:bold;">
                     <td>Institution </td>
@@ -336,11 +385,16 @@
                     </tr>
                 <?php endforeach; ?>
             </table>
-            <div class="det_header">
-
-                <h4>KNOWLEDGE OF LANGUAGES</h4>
-                <h4 class="arabic">معرفة اللغات</h4>
-            </div>
+            <table class="det_header" style="width: 100%;">
+                <tr>
+                    <td style="width: 50%; text-align: left; ">
+                        <h4>KNOWLEDGE OF LANGUAGES</h4>
+                    </td>
+                    <td style="width: 50%; text-align: right; ">
+                        <h4 class="arabic">معرفة اللغات</h4>
+                    </td>
+                </tr>
+            </table>
             <table class="details-table language-table">
                 <tr style="background-color: #eee; font-weight:bold;">
                     <td>Language</td>
@@ -349,22 +403,28 @@
                 </tr>
                 <?php foreach ($languages as $lang): ?>
                     <tr>
-                        <td>English</td>
-                        <td>
-                            Basic <input type="checkbox" <?= ($lang['proficiency'] == 'Basic') ? 'checked' : '' ?>> &nbsp;
-                            Intermediate <input type="checkbox" <?= ($lang['proficiency'] == 'Intermediate') ? 'checked' : '' ?>> &nbsp;
-                            Fluent <input type="checkbox" <?= ($lang['proficiency'] == 'Fluent') ? 'checked' : '' ?>> &nbsp;
-                            Native <input type="checkbox" <?= ($lang['proficiency'] == 'Native') ? 'checked' : '' ?>>
+                        <td style="width: 40%;"><?= $lang['language'] ?></td>
+                        <td style="width: 60%;">
+                            <?= ($lang['proficiency'] == 'Basic') ? '&#x2611;' : '&#x2610;' ?> Basic &nbsp;
+                            <?= ($lang['proficiency'] == 'Intermediate') ? '&#x2611;' : '&#x2610;' ?> Intermediate &nbsp;
+                            <?= ($lang['proficiency'] == 'Fluent') ? '&#x2611;' : '&#x2610;' ?> Fluent &nbsp;
+                            <?= ($lang['proficiency'] == 'Native') ? '&#x2611;' : '&#x2610;' ?> Native
                         </td>
+
 
                     </tr>
                 <?php endforeach; ?>
             </table>
-            <div class="det_header">
-
-                <h4>WORKING EXPERIENCE</h4>
-                <h4 class="arabic">الخبرة العملية</h4>
-            </div>
+            <table class="det_header" style="width: 100%;">
+                <tr>
+                    <td style="width: 50%; text-align: left; ">
+                        <h4>WORKING EXPERIENCE</h4>
+                    </td>
+                    <td style="width: 50%; text-align: right; ">
+                        <h4 class="arabic">الخبرة العملية</h4>
+                    </td>
+                </tr>
+            </table>
             <table class="details-table">
                 <tr style="background-color:#eee; font-weight:bold;">
 
@@ -388,11 +448,16 @@
                     </tr>
                 <?php endforeach; ?>
             </table>
-            <div class="det_header">
-
-                <h4>Skills</h4>
-                <h4 class="arabic"> مهارت</h4>
-            </div>
+            <table class="det_header" style="width: 100%;">
+                <tr>
+                    <td style="width: 50%; text-align: left; ">
+                        <h4>Skills</h4>
+                    </td>
+                    <td style="width: 50%; text-align: right; ">
+                        <h4 class="arabic"> مهارت</h4>
+                    </td>
+                </tr>
+            </table>
             <table class="details-table">
                 <tr style="background-color: #eee; font-weight:bold;">
                     <td>Skill name</td>
@@ -408,8 +473,11 @@
                 <?php endforeach; ?>
             </table>
         </div>
+        <div style="width:100%; text-align:center;">
+            <em>Generated by: <a href="www.octagon.om">Octagon.om</a></em>
+        </div>
         <div class="footer">
-            <img src="<?= $cvFooterSrc ?>">
+            <img src="<?= $cvFooterSrc ?>" width="100%">
         </div>
     </div>
 </body>
